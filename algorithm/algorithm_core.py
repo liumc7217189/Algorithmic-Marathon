@@ -147,6 +147,3 @@ def my_strategy(data_input,user, curStep, totalStep) :
     return direct
     # return(np.random.choice(['U', 'D', 'L', 'R', 'S']))
 
-
-if __name__ == '__main__':
-    algorithm_main(param, user, curStep, totalStep)
