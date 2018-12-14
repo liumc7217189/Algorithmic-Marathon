@@ -47,15 +47,15 @@ def my_strategy(data_input,user, curStep, totalStep) :
     j = 0
     for ind in job_df.index:
         i = job_df.loc[ind, 'x']
-        dis = -1 * (abs(i - data_input['player1']['x']) + abs(job_df.loc[j, 'y'] - data_input['player1']['y']))
+        dis = -1 * (abs(i - data_input[user]['x']) + abs(job_df.loc[j, 'y'] - data_input[user]['y']))
         j += 1
         job_df.loc[ind, 'dis'] = dis
         job_df = job_df.sort_values(by=['dis', 'value'], ascending=False)
 
-    act = data_input['player1']
-    h_position = data_input['player1']
+    act = data_input[user]
+    h_position = data_input[user]
 
-    if data_input['n_jobs'] == 10 | remain_step <= 30:
+    if data_input[user]['n_jobs'] == 10 | remain_step <= 30:
         while (int(h_position['home_x']) != act['x'] | int(h_position['home_y']) != act['y']):
             if (int(h_position['home_x']) < act['x']) & ((act['x'] - 1 & act['y']) not in walls_df):
                 act['x'] = act['x'] - 1
@@ -71,7 +71,7 @@ def my_strategy(data_input,user, curStep, totalStep) :
                 print('R')
     else:
         b_position = job_df.iloc[0, :]
-        act = data_input['player1']
+        act = data_input[user]
         while (int(b_position['x']) != act['x'] | int(b_position['y']) != act['y']):
             if (int(b_position['x']) < act['x']) & ((act['x'] - 1 & act['y']) not in walls_df):
                 act['x'] = act['x'] - 1
