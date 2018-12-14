@@ -55,11 +55,9 @@ totalStep:表示总步数
 def algorithm_main(param, user, curStep, totalStep):
     text = json.dumps(param)
     input_data = json.loads(text)
-    return my_strategy(input_data)
+    return my_strategy(input_data, user, curStep, totalStep)
 
-def my_strategy(input_data):
-    cur_step = int(input_data['curStep'])
-    total_step = int(input_data['totalStep'])
+def my_strategy(input_data, user, cur_step, total_step):
     dic_walls=input_data['walls']
     dic_jobs=input_data['jobs']
     walls=np.ones((12,12)) #可走的路是1， 不能走的障碍是0
