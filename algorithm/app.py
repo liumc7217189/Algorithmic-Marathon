@@ -61,6 +61,7 @@ def end():
 def detail():
     global stepResultsArray
     i = int(request.values.get("curID"))
+    print((i-1) + "&&&&&&&&&&&&&")
     if i-1>=0 and len(stepResultsArray[i-1]) > 0:
         return render_template("detail.html", steps=stepResultsArray[i - 1])
     else:
