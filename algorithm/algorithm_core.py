@@ -143,7 +143,9 @@ def my_strategy(data_input,user, curStep, totalStep) :
                     direct.append('D')
                     print(direct)
 
-    print('===\n', direct[0])
-    return direct
+    if len(direct) > 0:
+        return direct[0]
+    else:
+        return "S"
     # return(np.random.choice(['U', 'D', 'L', 'R', 'S']))
 
