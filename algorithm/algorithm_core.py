@@ -1,9 +1,14 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Dec 12 17:13:14 2018
+
+@author: 01377931
+"""
 #import requests
 import numpy as np
-import pandas as pd
 #import gevent
 #import json
-import argparse
+#import argparse
 """
 algorithm_main方法为算法入口，请不要变更该方法名，返回方向字符串，例如“U”，方便我调用！！！
 传入参数如下：
@@ -31,59 +36,11 @@ param:
         ]
     }
 user:代表我们处在当前的角色，如果user = "player1"，则对手是player2
-curStep:表示当前步数
-totalStep:表示总步数
 """
+def algorithm_main(param, user):
+    print(6666666)
+    data_input = param
+    return my_strategy(data_input)
 
-def algorithm_main(param, user, curStep, totalStep):
-    return my_strategy(param,user, curStep, totalStep)
-
-def my_strategy(data_input,user, curStep, totalStep) :
-    walls_df = pd.DataFrame(data_input['walls'])
-    remain_step = totalStep - curStep
-    # print(walls_df)
-    # 计算包裹距离，按照从近到远排序
-    job_df = pd.DataFrame(data_input['jobs'])
-    j = 0
-    for ind in job_df.index:
-        i = job_df.loc[ind, 'x']
-        dis = -1 * (abs(i - data_input[user]['x']) + abs(job_df.loc[j, 'y'] - data_input[user]['y']))
-        j += 1
-        job_df.loc[ind, 'dis'] = dis
-        job_df = job_df.sort_values(by=['dis', 'value'], ascending=False)
-
-    act = data_input[user]
-    h_position = data_input[user]
-
-    if data_input[user]['n_jobs'] == 10 | remain_step <= 30:
-        while (int(h_position['home_x']) != act['x'] | int(h_position['home_y']) != act['y']):
-            if (int(h_position['home_x']) < act['x']) & ((act['x'] - 1 & act['y']) not in walls_df):
-                act['x'] = act['x'] - 1
-                print('U')
-            elif (int(h_position['home_y']) < act['y']) & ((act['x'] & act['y'] - 1) not in walls_df):
-                act['y'] = act['y'] - 1
-                print('L')
-            elif (int(h_position['home_x']) > act['y']) & ((act['x'] + 1 & act['y']) not in walls_df):
-                act['x'] = act['x'] + 1
-                print('D')
-            elif (int(h_position['home_y']) > act['y']) & ((act['x'] & act['y'] + 1) not in walls_df):
-                act['y'] = act['y'] + 1
-                print('R')
-    else:
-        b_position = job_df.iloc[0, :]
-        act = data_input[user]
-        while (int(b_position['x']) != act['x'] | int(b_position['y']) != act['y']):
-            if (int(b_position['x']) < act['x']) & ((act['x'] - 1 & act['y']) not in walls_df):
-                act['x'] = act['x'] - 1
-                print('U')
-            elif (int(b_position['y']) < act['y']) & ((act['x'] & act['y'] - 1) not in walls_df):
-                act['y'] = act['y'] - 1
-                print('L')
-            elif (int(b_position['y']) > act['y']) & ((act['x'] + 1 & act['y']) not in walls_df):
-                act['x'] = act['x'] + 1
-                print('D')
-            elif (int(b_position['y']) > act['y']) & ((act['x'] & act['y'] + 1) not in walls_df):
-                act['y'] = act['y'] + 1
-                print('R')
-    return act
-    # return(np.random.choice(['U', 'D', 'L', 'R', 'S']))
+def my_strategy(data_input) :
+    return(np.random.choice(['U', 'D', 'L', 'R', 'S']))

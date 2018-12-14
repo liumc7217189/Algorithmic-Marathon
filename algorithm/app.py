@@ -20,20 +20,21 @@ def hello_world():
 
 @app.route('/getUserName')
 def getUser():
-    global user
+    global user,results
     user = request.values.get("username")
-    return render_template("init.html",user=user)
+    return render_template("init.html",user=user,result=results)
 
 @app.route('/uploadCore', methods=['POST'])
 def uploadCore():
     f = request.files['core']
     basepath = os.path.dirname(__file__)  # 当前文件所在路径
     upload_path = os.path.join(basepath, '', secure_filename(f.filename))
+    print(upload_path)
     f.save(upload_path)
-    global ac
+    global ac,user,results
     ac = importlib.import_module(os.path.splitext(f.filename)[0])
     importlib.reload(ac)
-    return render_template("init.html",user=user)
+    return render_template("init.html",user=user,result=results)
 
 @app.route('/start', methods=['POST','GET'])
 def start():
