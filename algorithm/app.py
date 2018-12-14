@@ -24,9 +24,10 @@ def getUser():
     user = request.values.get("username")
     return render_template("init.html",user=user,result=results)
 
-@app.route('/uploadCore', methods=['POST'])
+@app.route('/uploadFile', methods=['POST'])
 def uploadCore():
-    f = request.files['core']
+    f = request.files['file']
+    print(f)
     basepath = os.path.dirname(__file__)  # 当前文件所在路径
     upload_path = os.path.join(basepath, '', secure_filename(f.filename))
     print(upload_path)
