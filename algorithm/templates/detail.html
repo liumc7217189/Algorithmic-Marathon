@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <p>当前步的得分情况</p>
+        {% for item in steps %}
+            <span style="font-weight: bolder;font-size: 16px;color: mediumvioletred">第{{ loop.index }}步</span>
+            <p><span style="font-weight: bolder">player1:</span>{{item.player1}}</p>
+            <p><span style="font-weight: bolder">player2:</span>{{item.player2}}</p>
+            <p><span style="font-weight: bolder">walls:</span>{{item.walls}}</p>
+            <p><span style="font-weight: bolder">jobs:</span>{{item.jobs}}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

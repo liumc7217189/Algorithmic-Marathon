@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="GET" action="/getUserName">
+        <label style="float: left">当前用户</label>
+        <input type="text" name="username" value="{{ user }}">
+        <input type="submit">
+    </form>
+    <div style="height: 30px"></div>
+    <form method="POST" action="/uploadCore" enctype='multipart/form-data'>
+        <label style="float: left">更新算法</label>
+        <input type="file" name="core">
+        <input type="submit" value="上传">
+    </form>
+    <div style="height: 30px;"></div>
+    <div>
+        <p>运算结果</p>
+        {% for item in result %}
+            <span style="font-weight: bolder;font-size: 16px;color: mediumvioletred">第{{ loop.index }}次</span>
+            <p><span style="font-weight: bolder">player1:</span>{{item.player1}}</p>
+            <p><span style="font-weight: bolder">player2:</span>{{item.player2}}</p>
+            <p><span style="font-weight: bolder">walls:</span>{{item.walls}}</p>
+            <p><span style="font-weight: bolder">jobs:</span>{{item.jobs}}</p>
+            <form method="get" action="/detail">
+                <input type="hidden" name="curID" value="{{ loop.index }}">
+                <input type="submit" value="查看具体细节">
+            </form>
+        {% endfor %}
+    </div>
+</body>
+</html>
