@@ -61,10 +61,13 @@ def end():
 def detail():
     global stepResultsArray
     i = int(request.values.get("curID"))
-    if(i==0 or len(stepResultsArray[i-1]) == 0):
+    if(i==0):
         return "空数据，请检查代码!!!"
     else:
-        return render_template("detail.html",steps=stepResultsArray[i-1])
+        if(len(stepResultsArray[i-1]) == 0):
+            return "空数据，请检查代码!!!"
+        else:
+            return render_template("detail.html",steps=stepResultsArray[i-1])
 
 if __name__ == '__main__':
     app.run()
